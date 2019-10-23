@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "extra_config": {},
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "CoolUserService",
+  "endpoints": [
+    {
+      "endpoint": "/get-user",
+      "method": "GET",
+      "extra_config": {},
+      "output_encoding": "json",
+      "concurrent_calls": 1,
+      "querystring_params": [
+        "id"
+      ],
+      "backend": [
+        {
+          "host": [ "https://api.github.com" ],
+          "url_patten": "/users/{id}"
+        }
+      ]
+    }
+  ]
+}
