@@ -7,18 +7,17 @@
   "name": "CoolUserService",
   "endpoints": [
     {
-      "endpoint": "/get-user",
+      "endpoint": "api/get-user/{userId}",
       "method": "GET",
       "extra_config": {},
       "output_encoding": "json",
       "concurrent_calls": 1,
-      "querystring_params": [
-        "id"
-      ],
+      "querystring_params": [],
       "backend": [
         {
+          "method": "GET",
           "host": [ "https://api.github.com" ],
-          "url_patten": "/users/{id}"
+          "url_pattern": "/users/{userId}"
         }
       ]
     }
