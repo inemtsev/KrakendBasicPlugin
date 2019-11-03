@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -20,7 +21,7 @@ var HandlerRegisterer registrable = registrable("headerModPlugin")
 
 type registrable string
 
-const outputHeaderName = "X-Friend-User"
+const outputHeaderName = "x-friend-user"
 const pluginName = "headerModPlugin"
 
 func (r registrable) RegisterHandlers(f func(
@@ -67,7 +68,16 @@ func (r registrable) registerHandlers(ctx context.Context, extra map[string]inte
 		*r2 = *r
 
 		r2.Header.Set(outputHeaderName, string(rsBodyBytes))
+		writeStuffToFile(string(rsBodyBytes))
 
 		handler.ServeHTTP(w, r2)
 	}), nil
+}
+
+func writeStuffToFile(text string) {
+	f, err := os.Create("log1.txt")
+	_, err = f.WriteString(text + "\n")
+	if err != nil {
+		panic(err)
+	}
 }
