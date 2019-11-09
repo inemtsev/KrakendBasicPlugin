@@ -21,6 +21,9 @@
       "extra_config": {},
       "output_encoding": "json",
       "concurrent_calls": 1,
+      "headers_to_pass": [
+        "X-Friend-User"
+      ],
       "querystring_params": [],
       "backend": [
         {
